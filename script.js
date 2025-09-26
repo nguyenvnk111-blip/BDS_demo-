@@ -973,7 +973,145 @@ function askQuickQuestion(question) {
     sendChatMessage();
 }
 
-// Initialize the page
+// Auth Modal Logic
+const authModal = document.getElementById('authModal');
+const openLoginBtn = document.getElementById('openLogin');
+const openRegisterBtn = document.getElementById('openRegister');
+const authCloseBtn = document.getElementById('authClose');
+const authTabs = document.querySelectorAll('.auth-tab');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const navActions = document.getElementById('navActions');
+
+function openAuth(tab = 'login') {
+    authModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    setActiveTab(tab);
+}
+
+function closeAuth() {
+    authModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function setActiveTab(tab) {
+    authTabs.forEach(t => t.classList.remove('active'));
+    document.querySelector(`.auth-tab[data-tab="${tab}"]`).classList.add('active');
+    if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+    } else {
+        registerForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+    }
+}
+
+openLoginBtn.addEventListener('click', () => openAuth('login'));
+openRegisterBtn.addEventListener('click', () => openAuth('register'));
+authCloseBtn.addEventListener('click', closeAuth);
+
+authTabs.forEach(tabBtn => {
+    tabBtn.addEventListener('click', () => setActiveTab(tabBtn.dataset.tab));
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === authModal) closeAuth();
+});
+
+// Storage helpers
+function getUsers() {
+    return JSON.parse(localStorage.getItem('users') || '[]');
+}
+function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+function setSession(user) {
+    localStorage.setItem('sessionUser', JSON.stringify(user));
+    renderUserState();
+}
+function getSession() {
+    const raw = localStorage.getItem('sessionUser');
+    return raw ? JSON.parse(raw) : null;
+}
+function clearSession() {
+    localStorage.removeItem('sessionUser');
+    renderUserState();
+}
+
+// Register
+registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('registerName').value.trim();
+    const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+    const phone = document.getElementById('registerPhone').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const confirm = document.getElementById('registerPasswordConfirm').value;
+
+    if (password.length < 6) {
+        showNotification('Mật khẩu tối thiểu 6 ký tự', 'info');
+        return;
+    }
+    if (password !== confirm) {
+        showNotification('Mật khẩu nhập lại không khớp', 'info');
+        return;
+    }
+
+    const users = getUsers();
+    if (users.find(u => u.email === email)) {
+        showNotification('Email đã tồn tại', 'info');
+        return;
+    }
+
+    const newUser = { id: Date.now(), name, email, phone, password };
+    users.push(newUser);
+    saveUsers(users);
+    setSession({ id: newUser.id, name: newUser.name, email: newUser.email });
+    closeAuth();
+    showNotification('Đăng ký thành công!', 'success');
+});
+
+// Login
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+    const users = getUsers();
+    const user = users.find(u => u.email === email && u.password === password);
+    if (!user) {
+        showNotification('Email hoặc mật khẩu không đúng', 'info');
+        return;
+    }
+    setSession({ id: user.id, name: user.name, email: user.email });
+    closeAuth();
+    showNotification('Đăng nhập thành công!', 'success');
+});
+
+// Render navbar user state
+function renderUserState() {
+    const session = getSession();
+    if (!navActions) return;
+    if (session) {
+        navActions.innerHTML = `
+            <div class="user-menu">
+                <span class="user-name"><i class="fas fa-user-circle"></i> ${session.name}</span>
+                <button class="btn-secondary" id="logoutBtn">Đăng xuất</button>
+            </div>
+        `;
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            clearSession();
+            showNotification('Bạn đã đăng xuất', 'success');
+        });
+    } else {
+        navActions.innerHTML = `
+            <button class="btn-secondary" id="openLogin">Đăng nhập</button>
+            <button class="btn-primary" id="openRegister">Đăng ký</button>
+        `;
+        document.getElementById('openLogin').addEventListener('click', () => openAuth('login'));
+        document.getElementById('openRegister').addEventListener('click', () => openAuth('register'));
+    }
+}
+
+// Initial render
 document.addEventListener('DOMContentLoaded', () => {
     displayProperties();
     
@@ -1021,4 +1159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    renderUserState();
 });

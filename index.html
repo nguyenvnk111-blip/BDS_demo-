@@ -22,6 +22,10 @@
                     <li><a href="#about" class="nav-link">Giới thiệu</a></li>
                     <li><a href="#contact" class="nav-link">Liên hệ</a></li>
                 </ul>
+                <div class="nav-actions" id="navActions">
+                    <button class="btn-secondary" id="openLogin">Đăng nhập</button>
+                    <button class="btn-primary" id="openRegister">Đăng ký</button>
+                </div>
                 <div class="nav-toggle">
                     <span></span>
                     <span></span>
@@ -205,7 +209,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Địa chỉ</h4>
-                            <p>91a2, khu phố Bình Khởi, Trương Định street, Sơn Đông, Tỉnh Vĩnh Long</p>
+                            <p>91a2, khu phố Bình Khởi, Trương Định street, Sơn Đông, Tỉnh Cao Bằng</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -265,6 +269,7 @@
                         <li><a href="#properties">Bất động sản</a></li>
                         <li><a href="#about">Giới thiệu</a></li>
                         <li><a href="#contact">Liên hệ</a></li>
+                        <li><a href="#register">Đăng ký</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -340,6 +345,46 @@
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <span class="close" id="authClose">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Đăng nhập</button>
+                <button class="auth-tab" data-tab="register">Đăng ký</button>
+            </div>
+            <div class="auth-forms">
+                <form id="loginForm" class="auth-form" autocomplete="on">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Đăng nhập</button>
+                </form>
+                <form id="registerForm" class="auth-form hidden" autocomplete="on">
+                    <div class="form-group">
+                        <input type="text" id="registerName" placeholder="Họ và tên" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="registerPhone" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="registerPassword" placeholder="Mật khẩu" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="registerPasswordConfirm" placeholder="Nhập lại mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Tạo tài khoản</button>
+                </form>
             </div>
         </div>
     </div>
