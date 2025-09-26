@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDream Real Estate - Nơi Tìm Kiếm Nhà Đất Lý Tưởng</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="images/Logoweb.png" alt="HDream Real Estate Logo" class="main-logo">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Trang chủ</a></li>
+                    <li><a href="#properties" class="nav-link">Bất động sản</a></li>
+                    <li><a href="#about" class="nav-link">Giới thiệu</a></li>
+                    <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+                </ul>
+                <div class="nav-actions" id="navActions">
+                    <button class="btn-secondary" id="openLogin">Đăng nhập</button>
+                    <button class="btn-primary" id="openRegister">Đăng ký</button>
+                </div>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-logo">
+            <img src="images/Logoweb.png" alt="HDream Real Estate Logo" class="hero-main-logo">
+        </div>
+        <div class="hero-content">
+            <h1>Tìm Kiếm Ngôi Nhà Mơ Ước Của Bạn</h1>
+            <p>Khám phá hàng nghìn bất động sản chất lượng cao với giá cả hợp lý</p>
+            <div class="search-box">
+                <div class="search-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="Nhập địa điểm, quận/huyện...">
+                </div>
+                <div class="search-select">
+                    <select id="propertyType">
+                        <option value="">Loại bất động sản</option>
+                        <option value="apartment">Căn hộ chung cư</option>
+                        <option value="house">Nhà riêng</option>
+                        <option value="villa">Biệt thự</option>
+                        <option value="land">Đất nền</option>
+                    </select>
+                </div>
+                <div class="search-select">
+                    <select id="priceRange">
+                        <option value="">Mức giá</option>
+                        <option value="0-2">Dưới 2 tỷ</option>
+                        <option value="2-5">2-5 tỷ</option>
+                        <option value="5-10">5-10 tỷ</option>
+                        <option value="10-20">10-20 tỷ</option>
+                        <option value="20+">Trên 20 tỷ</option>
+                        <option value="rent">Cho thuê</option>
+                    </select>
+                </div>
+                <div class="search-select">
+                    <select id="bedrooms">
+                        <option value="">Số phòng ngủ</option>
+                        <option value="1">1 phòng ngủ</option>
+                        <option value="2">2 phòng ngủ</option>
+                        <option value="3">3 phòng ngủ</option>
+                        <option value="4">4 phòng ngủ</option>
+                        <option value="5+">5+ phòng ngủ</option>
+                    </select>
+                </div>
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <h3>5000+</h3>
+                <p>Bất động sản</p>
+            </div>
+            <div class="stat">
+                <h3>1000+</h3>
+                <p>Khách hàng hài lòng</p>
+            </div>
+            <div class="stat">
+                <h3>15+</h3>
+                <p>Năm kinh nghiệm</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section id="properties" class="properties">
+        <div class="container">
+            <div class="section-header">
+                <h2>Bất Động Sản Nổi Bật</h2>
+                <p>Những sản phẩm được yêu thích nhất</p>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <button class="filter-btn" data-filter="apartment">Căn hộ</button>
+                <button class="filter-btn" data-filter="house">Nhà riêng</button>
+                <button class="filter-btn" data-filter="villa">Biệt thự</button>
+                <button class="filter-btn" data-filter="land">Đất nền</button>
+            </div>
+
+            <div class="properties-grid" id="propertiesGrid">
+                <!-- Properties will be loaded here by JavaScript -->
+            </div>
+
+            <div class="load-more">
+                <button class="btn-secondary">Xem thêm</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Dịch Vụ Của Chúng Tôi</h2>
+                <p>Cam kết mang đến trải nghiệm tốt nhất</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Tìm kiếm thông minh</h3>
+                    <p>Công nghệ AI giúp tìm kiếm bất động sản phù hợp nhất với nhu cầu của bạn</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Bảo đảm pháp lý</h3>
+                    <p>100% bất động sản đều có giấy tờ pháp lý rõ ràng, minh bạch</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Hỗ trợ 24/7</h3>
+                    <p>Đội ngũ chuyên viên tư vấn sẵn sàng hỗ trợ bạn mọi lúc, mọi nơi</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Đầu tư sinh lời</h3>
+                    <p>Tư vấn chiến lược đầu tư bất động sản hiệu quả và an toàn</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Về Chúng Tôi</h2>
+                    <p>Với hơn 15 năm kinh nghiệm trong lĩnh vực bất động sản, chúng tôi tự hào là đối tác tin cậy của hàng nghìn khách hàng. Chúng tôi cam kết mang đến những sản phẩm chất lượng cao với giá cả hợp lý.</p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Đội ngũ chuyên nghiệp</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Dịch vụ tận tâm</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Giá cả cạnh tranh</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary">Tìm hiểu thêm</button>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Liên Hệ Với Chúng Tôi</h2>
+                <p>Hãy để lại thông tin để được tư vấn miễn phí</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Địa chỉ</h4>
+                            <p>91a2, khu phố Bình Khởi, Trương Định street, Sơn Đông, Tỉnh Cao Bằng</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Điện thoại</h4>
+                            <p>+84 37 800 1464</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>nguyenvnk111@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Họ và tên" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Nội dung tin nhắn" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Gửi tin nhắn</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/Logoweb.png" alt="HDream Real Estate Logo" class="footer-main-logo">
+                    </div>
+                    <p>Nền tảng bất động sản hàng đầu Việt Nam, kết nối người mua và người bán một cách hiệu quả.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Liên kết nhanh</h4>
+                    <ul>
+                        <li><a href="#home">Trang chủ</a></li>
+                        <li><a href="#properties">Bất động sản</a></li>
+                        <li><a href="#about">Giới thiệu</a></li>
+                        <li><a href="#contact">Liên hệ</a></li>
+                        <li><a href="#register">Đăng ký</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Loại bất động sản</h4>
+                    <ul>
+                        <li><a href="#">Căn hộ chung cư</a></li>
+                        <li><a href="#">Nhà riêng</a></li>
+                        <li><a href="#">Biệt thự</a></li>
+                        <li><a href="#">Đất nền</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HDream Real Estate. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chat Widget -->
+    <div id="aiChatWidget" class="ai-chat-widget">
+        <div class="chat-toggle" id="chatToggle">
+            <img src="images/ai-icon.svg" alt="AI Icon" class="ai-icon-toggle">
+            <span>AI Tư vấn</span>
+        </div>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <img src="images/ai-icon.svg" alt="AI Icon" class="ai-icon-header">
+                    <span>AI Tư vấn Bất động sản</span>
+                </div>
+                <button class="chat-close" id="chatClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Xin chào! Tôi là AI tư vấn bất động sản của HomeDream. Tôi có thể giúp bạn:</p>
+                        <ul>
+                            <li>🔍 Tìm kiếm bất động sản phù hợp</li>
+                            <li>💰 Tư vấn về giá cả thị trường</li>
+                            <li>📋 Hướng dẫn thủ tục mua bán</li>
+                            <li>🏠 Đánh giá tiềm năng đầu tư</li>
+                        </ul>
+                        <p>Bạn cần tư vấn gì về bất động sản?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <div class="quick-questions">
+                    <button class="quick-btn" onclick="askQuickQuestion('Tôi muốn mua căn hộ 2 phòng ngủ')">Căn hộ 2PN</button>
+                    <button class="quick-btn" onclick="askQuickQuestion('Giá đất nền hiện tại như thế nào?')">Giá đất nền</button>
+                    <button class="quick-btn" onclick="askQuickQuestion('Thủ tục mua nhà cần những gì?')">Thủ tục mua nhà</button>
+                    <button class="quick-btn" onclick="askQuickQuestion('Tư vấn đầu tư bất động sản')">Đầu tư BDS</button>
+                    <button class="quick-btn" onclick="askQuickQuestion('Phân tích thị trường bất động sản')">Phân tích thị trường</button>
+                    <button class="quick-btn" onclick="askQuickQuestion('Thông tin vay mua nhà')">Vay mua nhà</button>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
+                    <button id="sendMessage" class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <span class="close" id="authClose">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Đăng nhập</button>
+                <button class="auth-tab" data-tab="register">Đăng ký</button>
+            </div>
+            <div class="auth-forms">
+                <form id="loginForm" class="auth-form" autocomplete="on">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Đăng nhập</button>
+                </form>
+                <form id="registerForm" class="auth-form hidden" autocomplete="on">
+                    <div class="form-group">
+                        <input type="text" id="registerName" placeholder="Họ và tên" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="registerPhone" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="registerPassword" placeholder="Mật khẩu" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="registerPasswordConfirm" placeholder="Nhập lại mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Tạo tài khoản</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property Modal -->
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Property details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
